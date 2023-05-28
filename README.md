@@ -1,0 +1,1 @@
+Projeto para o Levantamento Patrimonial, feito em 2023 pela Turma de ADS 2022 na matéria de Fabrica de Software II
