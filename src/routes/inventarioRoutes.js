@@ -4,6 +4,8 @@ import InventarioController from "../controller/inventarioController.js";
 const router = express.Router();
 
 router
-  .get("/inventarios", InventarioController.listarInventarios)
+  .post('/inventarios',InventarioController.cadastrarInventario)
+  .get('/inventarios', InventarioController.listarInventarios)
+  .get('/inventarios/:id', InventarioController.listarInventariosId)
 
   export default router;
