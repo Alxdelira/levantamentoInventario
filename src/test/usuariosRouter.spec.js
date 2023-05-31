@@ -65,6 +65,8 @@ describe('Testes em Usuarios', () => {
       .expect(201);
 
     expect(resposta.body.nome).toEqual(exemploTeste.nome);
+    expect(resposta.body.senha.length).toBeGreaterThan(7);
+    expect(resposta.body.senha).toEqual(exemploTeste.senha);  
     expect(resposta.body.email).toEqual(exemploTeste.email);
     expect(resposta.body.ativo).toEqual(exemploTeste.ativo);
 
@@ -78,6 +80,7 @@ describe('Testes em Usuarios', () => {
       .expect(200);
 
     expect(resposta.body.docs.length).toBeGreaterThan(0);
+    expect(resposta.query)
   });
 
   it("Deve retornar um usuário específico", async () => {
