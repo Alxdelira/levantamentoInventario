@@ -1,6 +1,6 @@
 import { describe, expect, it, jest, beforeEach, afterAll, afterEach } from '@jest/globals';
 import mongoose from "mongoose";
-import app from '../app.js';
+import app from '../../app.js';
 import request from "supertest";
 import faker from 'faker-br';
 
