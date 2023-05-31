@@ -8,7 +8,7 @@ const itemSchema = new mongoose.Schema(
     naoEtiquetado: { type: Boolean, default: false },
     encontrado: { type: Boolean, default: false },
     nome: { type: String, required: true, },
-    setor: { _id: { type: mongoose.Schema.Types.ObjectId, ref: 'setor' } },
+    setor: { type: mongoose.Schema.Types.ObjectId, ref: 'setor' },
     estado: { type: String },
     ativo: { type: Boolean, default: true },
     descricao: { type: String },
