@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1685498842860" clover="3.2.0">
-  <project timestamp="1685498842861" name="All files">
-    <metrics statements="187" coveredstatements="93" conditionals="74" coveredconditionals="26" methods="17" coveredmethods="10" elements="278" coveredelements="129" complexity="0" loc="187" ncloc="187" packages="5" files="15" classes="15"/>
+<coverage generated="1685559671952" clover="3.2.0">
+  <project timestamp="1685559671952" name="All files">
+    <metrics statements="213" coveredstatements="124" conditionals="80" coveredconditionals="31" methods="20" coveredmethods="15" elements="313" coveredelements="170" complexity="0" loc="213" ncloc="213" packages="5" files="15" classes="15"/>
     <package name="src">
       <metrics statements="7" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
       <file name="app.js" path="/home/whomi/projetos/levantamentoInventario/src/app.js">
@@ -27,27 +27,27 @@
       </file>
     </package>
     <package name="src.controller">
-      <metrics statements="150" coveredstatements="59" conditionals="74" coveredconditionals="26" methods="11" coveredmethods="7"/>
+      <metrics statements="176" coveredstatements="90" conditionals="80" coveredconditionals="31" methods="14" coveredmethods="12"/>
       <file name="inventarioController.js" path="/home/whomi/projetos/levantamentoInventario/src/controller/inventarioController.js">
-        <metrics statements="35" coveredstatements="13" conditionals="18" coveredconditionals="10" methods="3" coveredmethods="1"/>
-        <line num="4" count="2" type="stmt"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="6" count="0" type="stmt"/>
-        <line num="8" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="24" count="2" type="stmt"/>
+        <metrics statements="61" coveredstatements="44" conditionals="24" coveredconditionals="15" methods="6" coveredmethods="6"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="23" count="3" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
         <line num="25" count="1" type="stmt"/>
         <line num="26" count="1" type="stmt"/>
-        <line num="27" count="1" type="stmt"/>
-        <line num="29" count="1" type="stmt"/>
-        <line num="34" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="33" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="34" count="0" type="stmt"/>
         <line num="35" count="0" type="stmt"/>
-        <line num="36" count="0" type="stmt"/>
-        <line num="38" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="37" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="38" count="0" type="stmt"/>
         <line num="39" count="0" type="stmt"/>
-        <line num="40" count="0" type="stmt"/>
         <line num="42" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="43" count="0" type="stmt"/>
         <line num="44" count="0" type="stmt"/>
@@ -57,18 +57,44 @@
         <line num="51" count="1" type="stmt"/>
         <line num="52" count="1" type="stmt"/>
         <line num="55" count="0" type="stmt"/>
-        <line num="59" count="2" type="stmt"/>
-        <line num="60" count="0" type="stmt"/>
-        <line num="61" count="0" type="stmt"/>
-        <line num="62" count="0" type="stmt"/>
-        <line num="64" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="65" count="0" type="stmt"/>
-        <line num="68" count="0" type="stmt"/>
+        <line num="59" count="3" type="stmt"/>
+        <line num="60" count="2" type="stmt"/>
+        <line num="61" count="2" type="stmt"/>
+        <line num="62" count="2" type="stmt"/>
+        <line num="64" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="68" count="1" type="stmt"/>
         <line num="71" count="0" type="stmt"/>
+        <line num="75" count="3" type="stmt"/>
+        <line num="76" count="1" type="stmt"/>
+        <line num="78" count="1" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="81" count="1" type="stmt"/>
+        <line num="87" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="88" count="0" type="stmt"/>
+        <line num="91" count="1" type="stmt"/>
+        <line num="94" count="0" type="stmt"/>
+        <line num="98" count="3" type="stmt"/>
+        <line num="99" count="1" type="stmt"/>
+        <line num="100" count="1" type="stmt"/>
+        <line num="101" count="1" type="stmt"/>
+        <line num="103" count="1" type="stmt"/>
+        <line num="109" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="110" count="0" type="stmt"/>
+        <line num="113" count="1" type="stmt"/>
+        <line num="115" count="0" type="stmt"/>
+        <line num="118" count="3" type="stmt"/>
+        <line num="119" count="1" type="stmt"/>
+        <line num="120" count="1" type="stmt"/>
+        <line num="121" count="1" type="stmt"/>
+        <line num="123" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="124" count="0" type="stmt"/>
+        <line num="127" count="1" type="stmt"/>
+        <line num="129" count="0" type="stmt"/>
       </file>
       <file name="itemController.js" path="/home/whomi/projetos/levantamentoInventario/src/controller/itemController.js">
         <metrics statements="32" coveredstatements="1" conditionals="18" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="6" count="2" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
         <line num="7" count="0" type="stmt"/>
         <line num="8" count="0" type="stmt"/>
         <line num="9" count="0" type="stmt"/>
@@ -125,7 +151,7 @@
       </file>
       <file name="usuarioController.js" path="/home/whomi/projetos/levantamentoInventario/src/controller/usuarioController.js">
         <metrics statements="64" coveredstatements="45" conditionals="26" coveredconditionals="16" methods="6" coveredmethods="6"/>
-        <line num="4" count="2" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
         <line num="8" count="1" type="cond" truecount="1" falsecount="1"/>
@@ -135,7 +161,7 @@
         <line num="23" count="1" type="stmt"/>
         <line num="25" count="0" type="stmt"/>
         <line num="26" count="0" type="stmt"/>
-        <line num="30" count="2" type="stmt"/>
+        <line num="30" count="3" type="stmt"/>
         <line num="31" count="1" type="stmt"/>
         <line num="32" count="1" type="stmt"/>
         <line num="33" count="1" type="stmt"/>
@@ -155,7 +181,7 @@
         <line num="54" count="1" type="stmt"/>
         <line num="55" count="1" type="stmt"/>
         <line num="59" count="0" type="stmt"/>
-        <line num="65" count="2" type="stmt"/>
+        <line num="65" count="3" type="stmt"/>
         <line num="66" count="2" type="stmt"/>
         <line num="67" count="2" type="stmt"/>
         <line num="69" count="2" type="stmt"/>
@@ -163,7 +189,7 @@
         <line num="72" count="1" type="stmt"/>
         <line num="75" count="1" type="stmt"/>
         <line num="77" count="0" type="stmt"/>
-        <line num="81" count="2" type="stmt"/>
+        <line num="81" count="3" type="stmt"/>
         <line num="82" count="1" type="stmt"/>
         <line num="83" count="1" type="stmt"/>
         <line num="84" count="1" type="stmt"/>
@@ -172,7 +198,7 @@
         <line num="93" count="0" type="stmt"/>
         <line num="96" count="1" type="stmt"/>
         <line num="98" count="0" type="stmt"/>
-        <line num="102" count="2" type="stmt"/>
+        <line num="102" count="3" type="stmt"/>
         <line num="103" count="1" type="stmt"/>
         <line num="104" count="1" type="stmt"/>
         <line num="106" count="1" type="stmt"/>
@@ -180,7 +206,7 @@
         <line num="109" count="0" type="stmt"/>
         <line num="112" count="1" type="stmt"/>
         <line num="115" count="0" type="stmt"/>
-        <line num="120" count="2" type="stmt"/>
+        <line num="120" count="3" type="stmt"/>
         <line num="121" count="1" type="stmt"/>
         <line num="122" count="1" type="stmt"/>
         <line num="123" count="1" type="stmt"/>
@@ -195,28 +221,28 @@
       <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="inventario.js" path="/home/whomi/projetos/levantamentoInventario/src/models/inventario.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="4" count="2" type="stmt"/>
-        <line num="21" count="2" type="stmt"/>
-        <line num="23" count="2" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="14" count="3" type="stmt"/>
       </file>
       <file name="item.js" path="/home/whomi/projetos/levantamentoInventario/src/models/item.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="4" count="2" type="stmt"/>
-        <line num="20" count="2" type="stmt"/>
-        <line num="22" count="2" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="20" count="3" type="stmt"/>
+        <line num="22" count="3" type="stmt"/>
       </file>
       <file name="setor.js" path="/home/whomi/projetos/levantamentoInventario/src/models/setor.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="4" count="2" type="stmt"/>
-        <line num="13" count="2" type="stmt"/>
-        <line num="15" count="2" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="13" count="3" type="stmt"/>
+        <line num="15" count="3" type="stmt"/>
       </file>
       <file name="usuario.js" path="/home/whomi/projetos/levantamentoInventario/src/models/usuario.js">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="4" count="2" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
-        <line num="26" count="2" type="stmt"/>
-        <line num="29" count="2" type="stmt"/>
+        <line num="26" count="3" type="stmt"/>
+        <line num="29" count="3" type="stmt"/>
       </file>
     </package>
     <package name="src.routes">

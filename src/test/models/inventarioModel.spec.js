@@ -24,9 +24,7 @@ describe ('Deve retornar testes de unidade de Inventario', () => {
             InventarioController.listarInventarios = jest.fn().mockReturnValue(
                 [{
                     setor: setorID,
-                    itens: [
-                        { _id: mongoose.Schema.Types.ObjectId.get()}
-                    ],
+                    itens: [{ _id: mongoose.Schema.Types.ObjectId.get()}],
                     criadoEm: new Date()
                 }]
             )

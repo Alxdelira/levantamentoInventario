@@ -27,6 +27,7 @@ afterEach(() => {
 afterAll(() => {
   mongoose.connection.close();
 });
+
 const nome = faker.name.firstName();
 const nome_meio = faker.name.lastName();
 const sobrenome = faker.name.lastName();
@@ -53,7 +54,7 @@ const exemploTeste = {
 }
 
 
-describe('Testes em Usuarios', () => {
+describe('Testes de Rotas em Usuarios', () => {
   let usuarioId;
 
   it("Deve cadastrar um novo usuário", async () => {
@@ -80,7 +81,7 @@ describe('Testes em Usuarios', () => {
       .expect(200);
 
     expect(resposta.body.docs.length).toBeGreaterThan(0);
-    expect(resposta.query)
+    //expect(resposta.query)
   });
 
   it("Deve retornar um usuário específico", async () => {
