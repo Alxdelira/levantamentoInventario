@@ -84,10 +84,10 @@ const itemPadrao = {
 itens.push(itemPadrao);
 
 function getSetorId(qtd) {
-    for (let i = 0; i < qtd; i++) {
-        return setor[i]._id
-    }
+    const setorIndex = qtd % setor.length;
+    return setor[setorIndex]._id;
 }
+
 
 function seedItens(qtdItens) {
     for (let i = 0; i < qtdItens; i++) {
@@ -131,24 +131,24 @@ const inventarios = [];
 
 // Criação do inventário padrão
 const inventarioPadrao = {
-  setor: setor[0]._id,
-  itens: [item1._id, item2._id],
-  criadoEm: new Date()
-};
+    setor: setor[0]._id,
+    itens: [item1, item2].map(item => item._id),
+    criadoEm: new Date()
+  };
 
 inventarios.push(inventarioPadrao);
 
 // Função para criar inventários aleatórios
 function seedInventario(qtdInventario) {
-  for (let i = 0; i < qtdInventario; i++) {
-    const inventario = {
-      setor: setor[i % setor.length]._id,
-      bloco: faker.random.arrayElement(bloco_array),
-      itens: [item1._id, item2._id]
-    };
-    inventarios.push(inventario);
+    for (let i = 0; i < qtdInventario; i++) {
+      const inventario = {
+        setor: setor[i % setor.length]._id,
+        itens: [item1, item2].map(item => item._id)
+      };
+      inventarios.push(inventario);
+    }
   }
-}
+  
 
 seedInventario(10);
 

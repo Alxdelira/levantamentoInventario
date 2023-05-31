@@ -4,16 +4,7 @@ import mongoosePaginate from 'mongoose-paginate-v2';
 const inventarioSchema = new mongoose.Schema(
     {
         setor: { type: mongoose.Schema.Types.ObjectId, ref: 'setor', required: true },
-        itens:
-            [
-                {
-                    _id: {
-                        type: mongoose.Schema.Types.ObjectId,
-                        ref: 'item',
-
-                    }
-                }
-            ],
+        itens: [{ type: mongoose.Schema.Types.ObjectId, ref: 'item' }],
         criadoEm: { type: Date, default: Date.now },
     }
 );

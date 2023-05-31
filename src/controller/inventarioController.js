@@ -3,17 +3,16 @@ import Inventario from '../models/inventario.js';
 export default class InventarioController {
     static cadastrarInventario = async (req, res) => {
         try {
-            const { setor, bloco, item, criadoEm } = req.body
+            const { setor, itens, criadoEm } = req.body
 
             const novoInventario = new Inventario({
                 setor,
-                bloco,
-                item,
+                itens,
                 criadoEm
             });
 
             const inventarioSalvo = await novoInventario.save()
-            return res.status(201).json({ message: "Inventario salvo com sucesso!" }, inventarioSalvo)
+            return res.status(201).json(inventarioSalvo)
 
 
         } catch (error) {
@@ -23,7 +22,7 @@ export default class InventarioController {
     }
     static listarInventarios = async (req, res) => {
         try {
-            const { setor, bloco, item } = req.query;
+            const { setor, itens, criadoEm } = req.query;
             const { page, perPage } = req.query;
 
             const option = {
@@ -35,11 +34,12 @@ export default class InventarioController {
                 const setor = await Inventario.paginate({ setor: setor }, option)
                 return res.status(200).json(setor);
             }
-            if (bloco) {
-                const bloco = await Inventario.paginate({ bloco: bloco }, option)
-                return res.status(200).json(bloco);
+            if (criadoEm) {
+                const setor = await Inventario.paginate({ criadoEm: criadoEm }, option)
+                return res.status(200).json(criadoEm);
             }
-            if (item) {
+
+            if (itens) {
                 const item = await Inventario.paginate({ item: item }, option)
                 return res.status(200).json(item);
             }
@@ -69,6 +69,64 @@ export default class InventarioController {
 
         } catch (error) {
             return res.status(500).json({ error: true, code: 500, message: "Erro interno no Servidor!" })
+        }
+    }
+
+    static atualizarInventario = async (req, res) => {
+        try {
+
+            const { id } = req.params
+            const { setor, item: itens, criadoEm } = req.body;
+
+            const inventarioAtualizado = await Inventario.findByIdAndUpdate(
+                id,
+                { setor, itens: itens, criadoEm },
+                { new: true }
+            );
+
+            if (!inventarioAtualizado) {
+                return res.status(404).json({ error: true, code: 404, message: "Inventario não encontrado" })
+            }
+
+            return res.status(200).json(inventarioAtualizado)
+
+        } catch (error) {
+            return res.status(500).json({ error: true, code: 500, message: "Erro Interno no Servidor" })
+
+        }
+    }
+    static atualizarInventarioParcial = async (req, res) => {
+        try {
+            const { id } = req.params;
+            const updateData = req.body;
+
+            const inventarioAtualizado = await Inventario.findByIdAndUpdate(
+                id,
+                updateData,
+                { new: true }
+            );
+
+            if (!inventarioAtualizado) {
+                return res.status(404).json({ error: true, code: 404, message: "Inventario não encontrado" });
+            }
+
+            return res.status(200).json(inventarioAtualizado);
+        } catch (error) {
+            return res.status(500).json({ error: true, code: 500, message: "Erro interno no servidor" });
+        }
+    }
+    static deletarInventario = async (req, res) => {
+        try {
+            const { id } = req.params
+            const inventarioRemovido = await Inventario.findByIdAndRemove(id);
+
+            if (!inventarioRemovido) {
+                return res.status(404).json({ error: true, code: 404, message: "Inventario não encontrado" })
+            }
+
+            return res.status(204).json({ message: "Inventario removido com sucesso!" })
+        } catch (error) {
+            return res.status(500).json({ error: true, code: 500, message: "Erro Interno no Servidor" })
         }
     }
 
