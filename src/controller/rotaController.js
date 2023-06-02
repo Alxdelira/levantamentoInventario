@@ -72,10 +72,10 @@ class RotaController {
     }
   }
 
-  static excluirRota = async (req, res) => {
+  static deletarRota = async (req, res) => {
     try {
       const { id } = req.params;
-      const deletedRota = await rotas.findByIdAndDelete(id);
+      const deletedRota = await Rotas.findByIdAndDelete(id);
 
       if (!deletedRota) {
         return res.status(404).json({ error: true, code: 404, message: "Id da rota não localizado." });
