@@ -38,7 +38,6 @@ export default class ItemController {
         nome,
         setor,
         estado,
-        descricao,
         responsavel,
         ativo
       } = req.query
@@ -50,45 +49,64 @@ export default class ItemController {
       }
 
       if (etiqueta) {
-        const item = await Item.paginate({ etiqueta: new RegExp(etiqueta, "i") }, option)
-        return res.status(200).json(item);
+        const item = await Item.paginate({ etiqueta: etiqueta }, option);
+        if (item.totalDocs === 0) {
+          return res.status(404).json({ message: "Não Encontrado!" });
+        }
       }
+
       if (naoEtiquetado) {
-        const item = await Item.paginate({ naoEtiquetado: new RegExp(etiqueta, "i") }, option)
-        return res.status(200).json(item);
+        const item = await Item.paginate({ naoEtiquetado: naoEtiquetado }, option)
+        if (item.totalDocs === 0) {
+          return res.status(404).json({ message: "Não Encontrado!" });
+        }
       }
       if (encontrado) {
-        const item = await Item.paginate({ encontrado: new RegExp(etiqueta, "i") }, option)
-        return res.status(200).json(item);
+        const item = await Item.paginate({ encontrado: encontrado }, option)
+        if (item.totalDocs === 0) {
+          return res.status(404).json({ message: "Não Encontrado!" });
+        }
       }
 
       if (nome) {
         const item = await Item.paginate({ nome: new RegExp(nome, "i") }, option)
-        return res.status(200).json(item);
+        if (item.totalDocs === 0) {
+          return res.status(404).json({ message: "Não Encontrado!" });
+        }
       }
 
       if (setor) {
-        const item = await Item.paginate({ setor: new RegExp(setor, "i") }, option)
-        return res.status(200).json(item);
+        const item = await Item.paginate({ setor: setor }, option)
+        if (item.totalDocs === 0) {
+          return res.status(404).json({ message: "Não Encontrado!" });
+        }
       }
 
       if (estado) {
         const item = await Item.paginate({ estado: new RegExp(estado, "i") }, option)
-        return res.status(200).json(item);
+        if (item.totalDocs === 0) {
+          return res.status(404).json({ message: "Não Encontrado!" });
+        }
       }
 
       if (responsavel) {
         const item = await Item.paginate({ responsavel: new RegExp(responsavel, "i") }, option)
-        return res.status(200).json(item);
+        if (item.totalDocs === 0) {
+          return res.status(404).json({ message: "Não Encontrado!" });
+        }
       }
 
       if (ativo) {
         const item = await Item.paginate({ ativo: ativo }, option)
-        return res.status(200).json(item);
+        if (item.totalDocs === 0) {
+          return res.status(404).json({ message: "Não Encontrado!" });
+        }
       }
       if (etiqueta && responsavel) {
-        const item = await Item.paginate({ etiqueta: new RegExp(etiqueta, "i"), responsavel: new RegExp(responsavel, "i") }, option)
-        return res.status(200).json(item);
+        const item = await Item.paginate({ etiqueta: etiqueta, responsavel: new RegExp(responsavel, "i") }, option)
+        if (item.totalDocs === 0) {
+          return res.status(404).json({ message: "Não Encontrado!" });
+        }
       }
 
       const item = await Item.paginate({}, option)

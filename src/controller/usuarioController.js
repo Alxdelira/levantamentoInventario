@@ -36,19 +36,27 @@ export default class UsuarioController {
       }
       if (nome) {
         const usuarios = await Usuario.paginate({ nome: RegExp(nome, "i") }, options);
-        return res.status(200).json(usuarios);
+        if (usuarios.totalDocs === 0) {
+          return res.status(404).json({ message: "Não Encontrado!" });
+        }
       }
       if (email) {
         const usuarios = await Usuario.paginate({ email: RegExp(email, "i") }, options);
-        return res.status(200).json(usuarios);
+        if (usuarios.totalDocs === 0) {
+          return res.status(404).json({ message: "Não Encontrado!" });
+        }
       }
       if (nome && email) {
         const usuarios = await Usuario.paginate({ nome: RegExp(nome, "i"), email: RegExp(email, "i") }, options);
-        return res.status(200).json(usuarios);
+        if (usuarios.totalDocs === 0) {
+          return res.status(404).json({ message: "Não Encontrado!" });
+        }
       }
       if (ativo == true) {
         const usuarios = await Usuario.paginate({ ativo: true }, options);
-        return res.status(200).json(usuarios)
+        if (usuarios.totalDocs === 0) {
+          return res.status(404).json({ message: "Não Encontrado!" });
+        }
       }
 
       const usuarios = await Usuario.paginate({}, options);
