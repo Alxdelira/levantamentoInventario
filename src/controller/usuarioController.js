@@ -13,7 +13,7 @@ export default class UsuarioController {
       });
 
       if (!nome || !email || !senha) {
-        return res.status(400).json({ error: true, code: 400, message: `Necessario preencher todos os campos` })
+        return res.status(400).json({ error: true, code: 400, message: "Necessario preencher todos os campos" })
       }
 
 
@@ -37,13 +37,16 @@ export default class UsuarioController {
       if (nome) {
         const usuarios = await Usuario.paginate({ nome: RegExp(nome, "i") }, options);
         return res.status(200).json(usuarios);
-      } else if (email) {
+      }
+      if (email) {
         const usuarios = await Usuario.paginate({ email: RegExp(email, "i") }, options);
         return res.status(200).json(usuarios);
-      } else if (nome && email) {
+      }
+      if (nome && email) {
         const usuarios = await Usuario.paginate({ nome: RegExp(nome, "i"), email: RegExp(email, "i") }, options);
         return res.status(200).json(usuarios);
-      } else if (ativo == true) {
+      }
+      if (ativo == true) {
         const usuarios = await Usuario.paginate({ ativo: true }, options);
         return res.status(200).json(usuarios)
       }
@@ -77,11 +80,11 @@ export default class UsuarioController {
   static atualizarUsuario = async (req, res) => {
     try {
       const { id } = req.params;
-      const { nome, email, senha } = req.body;
+      const { nome, email, senha, ativo} = req.body;
 
       const usuarioAtualizado = await Usuario.findByIdAndUpdate(
         id,
-        { nome, email, senha },
+        { nome, email, senha, ativo },
         { new: true }
       );
 
@@ -94,6 +97,7 @@ export default class UsuarioController {
       return res.status(500).json({ error: true, code: 500, message: "Erro interno no servidor" });
     }
   }
+  
 
   static deletarUsuario = async (req, res) => {
     try {

@@ -7,7 +7,7 @@ import rotas from "./rotaRoutes.js";
 
 const routes = (app) => {
   app.route("/").get((req, res) => {
-    res.status(200).json({ message: "Bem vindo a Minha Api" })
+    res.status(200).json({ message: "Api -  Levantamento Patrimonial" })
   })
   app.use(
     usuarios,
