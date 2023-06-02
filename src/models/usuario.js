@@ -15,10 +15,9 @@ const usuarioSchema = new mongoose.Schema({
       message: 'Endereço de e-mail inválido'
     }
   },
-
   // Verificar com o Cliente se será necessario numero minimo de caracteres para senha. Por padrão coloquei 8.
-  senha: {    type: String,    minlength: 8,    required: true,    select: false  },
-  ativo: {    type: Boolean,    default: false  },
+  senha: { type: String, minlength: 8, required: true, select: false },
+  ativo: { type: Boolean, default: false },
   // Colocar o Arquivo rotas.js no models posteriormente.
 });
 

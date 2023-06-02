@@ -5,11 +5,6 @@ export default class UsuarioController {
     try {
       const { nome, email, senha, ativo } = req.body;
 
-      if (senha.length < 8) {
-        return res.status(400).json({ error: true, code: 400, message: "Necessario minimo de 8 caracteres" })
-      }
-      
-
       const novoUsuario = new Usuario({
         nome,
         email,
@@ -17,6 +12,10 @@ export default class UsuarioController {
         ativo
       });
 
+      if (!nome || !email || !senha) {
+        return res.status(400).json({ error: true, code: 400, message: `Necessario preencher todos os campos` })
+      }
+      
 
       const usuarioSalvo = await novoUsuario.save()
 
