@@ -67,12 +67,21 @@ describe('Testes de Rotas em Usuarios', () => {
 
     expect(resposta.body.nome).toEqual(exemploTeste.nome);
     expect(resposta.body.senha.length).toBeGreaterThan(7);
-    expect(resposta.body.senha).toEqual(exemploTeste.senha);  
+    expect(resposta.body.senha).toEqual(exemploTeste.senha);
     expect(resposta.body.email).toEqual(exemploTeste.email);
     expect(resposta.body.ativo).toEqual(exemploTeste.ativo);
-
+    
     usuarioId = resposta.body._id;
   });
+  it("Deve retornar uma Menssagem de inicio", async () => {
+    const res = await request(app)
+      .get('/')
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200);
+
+    expect(res.body.message).toEqual("Api -  Levantamento Patrimonial");
+  })
   it("Deve retornar a lista de usuários", async () => {
     const resposta = await request(app)
       .get('/usuarios')
@@ -81,7 +90,6 @@ describe('Testes de Rotas em Usuarios', () => {
       .expect(200);
 
     expect(resposta.body.docs.length).toBeGreaterThan(0);
-    //expect(resposta.query)
   });
 
   it("Deve retornar um usuário específico", async () => {
@@ -103,7 +111,6 @@ describe('Testes de Rotas em Usuarios', () => {
       email: "Joao.nobrega.2@gmail.com",
       senha: 87654321,
       ativo: true,
-      rota: [{}]
     };
     const resposta = await request(app)
       .put(`/usuarios/${usuarioId}`)
@@ -115,8 +122,8 @@ describe('Testes de Rotas em Usuarios', () => {
     expect(resposta.body._id).toEqual(usuarioId);
     expect(resposta.body.nome).toEqual(novoUsuario.nome);
     expect(resposta.body.email).toEqual(novoUsuario.email);
-    expect(resposta.body.ativo).toEqual(novoUsuario.ativo);
     expect(resposta.body.ativo).toBe(true);
+
   });
 
   it("Deve atualizar parcialmente um usuário", async () => {

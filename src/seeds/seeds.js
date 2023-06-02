@@ -92,7 +92,7 @@ function getSetorId(qtd) {
 function seedItens(qtdItens) {
     for (let i = 0; i < qtdItens; i++) {
         const seedItem = {
-            etiqueta: faker.lorem.words(),
+            etiqueta: faker.random.number({ min: 1, max: 9999 }),
             naoEtiquetado: false,
             encontrado: true,
             nome: faker.name.firstName(),
@@ -134,21 +134,21 @@ const inventarioPadrao = {
     setor: setor[0]._id,
     itens: [item1, item2].map(item => item._id),
     criadoEm: new Date()
-  };
+};
 
 inventarios.push(inventarioPadrao);
 
 // Função para criar inventários aleatórios
 function seedInventario(qtdInventario) {
     for (let i = 0; i < qtdInventario; i++) {
-      const inventario = {
-        setor: setor[i % setor.length]._id,
-        itens: [item1, item2].map(item => item._id)
-      };
-      inventarios.push(inventario);
+        const inventario = {
+            setor: setor[i % setor.length]._id,
+            itens: [item1, item2].map(item => item._id)
+        };
+        inventarios.push(inventario);
     }
-  }
-  
+}
+
 
 seedInventario(10);
 

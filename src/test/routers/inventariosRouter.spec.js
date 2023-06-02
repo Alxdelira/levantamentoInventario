@@ -1,4 +1,4 @@
-import { describe, expect, it, jest } from '@jest/globals';
+import { describe, expect, it, jest, afterAll } from '@jest/globals';
 import app from '../../app.js';
 import request from "supertest";
 
@@ -11,7 +11,6 @@ import request from "supertest";
   .delete('/inventarios/:id',InventarioController.deletarInventario)
  
 */
-
 
 const exempleTeste = {
     setor: "64775eb4ae1234e6f65decc1",
