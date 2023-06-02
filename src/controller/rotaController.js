@@ -29,7 +29,7 @@ class RotaController {
   static listarRotaPorId = async (req, res) => {
     try {
       const { id } = req.params;
-      const rota = await rotas.findById(id);
+      const rota = await Rotas.findById(id);
 
       if (!rota) {
         return res.status(404).json({ error: true, code: 404, message: "Id da rota não localizado." });
@@ -59,7 +59,7 @@ class RotaController {
       const { id } = req.params;
       const updateData = req.body;
 
-      const updatedRota = await rotas.findByIdAndUpdate(id, updateData);
+      const updatedRota = await Rotas.findByIdAndUpdate(id, updateData);
 
       if (!updatedRota) {
         return res.status(404).json({ error: true, code: 404, message: "Id da rota não localizado." });

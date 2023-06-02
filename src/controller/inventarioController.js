@@ -32,20 +32,28 @@ export default class InventarioController {
 
             if (setor) {
                 const setor = await Inventario.paginate({ setor: setor }, option)
-                return res.status(200).json(setor);
+                if (inventario.totalDocs === 0) {
+                    return res.status(404).json({ message: "Não Encontrado!" });
+                }
             }
             if (criadoEm) {
                 const setor = await Inventario.paginate({ criadoEm: criadoEm }, option)
-                return res.status(200).json(criadoEm);
+                if (inventario.totalDocs === 0) {
+                    return res.status(404).json({ message: "Não Encontrado!" });
+                }
             }
 
             if (itens) {
                 const item = await Inventario.paginate({ item: item }, option)
-                return res.status(200).json(item);
+                if (inventario.totalDocs === 0) {
+                    return res.status(404).json({ message: "Não Encontrado!" });
+                }
             }
             if (setor && item) {
                 const setorItem = await Inventario.paginate({ setor: setor, item: item }, option)
-                return res.status(200).json(setorItem);
+                if (inventario.totalDocs === 0) {
+                    return res.status(404).json({ message: "Não Encontrado!" });
+                }
             }
 
             const inventario = await Inventario.paginate({}, option)
