@@ -1,25 +1,36 @@
+import PermissaoMidleware from "../midddlewares/PermissaoMidleware.js";
 import Usuario from "../models/usuario.js";
 
 export default class UsuarioController {
   static cadastrarUsuario = async (req, res) => {
     try {
-      const { nome, email, senha, ativo } = req.body;
+      return await PermissaoMidleware.verificarPermissao('usuarios', 'post', req, res, async () => {
+        //const { nome, email, senha, ativo } = req.body;
 
-      const novoUsuario = new Usuario({
-        nome,
-        email,
-        senha,
-        ativo
+        let novoUsuario = new Usuario(req.body);
+
+        let userExist = novoUsuario.findOne({ email: req.body.email  })
+        if(userExist){
+          return res.status(400).json({ error: true, code: 400, message: "Usuário já cadastrado" })
+        }
+
+        let senhaHash = await bcrypt.hash(req.body.senha, 8);
+        novoUsuario.senha = senhaHash;
+
+        if (!nome || !email || !senha) {
+          return res.status(400).json({ error: true, code: 400, message: "Necessario preencher todos os campos" })
+        }
+        const usuarioSalvo = await novoUsuario.save(
+          (err) => {
+            if (err) {
+              return res.status(400).json({ error: true, code: 400, message: "Erro ao cadastrar usuário" })
+            } else {
+              return res.status(201).json(usuarioSalvo);
+            }
+          }
+        )
+       
       });
-
-      if (!nome || !email || !senha) {
-        return res.status(400).json({ error: true, code: 400, message: "Necessario preencher todos os campos" })
-      }
-
-
-      const usuarioSalvo = await novoUsuario.save()
-
-      return res.status(201).json(usuarioSalvo);
     } catch (error) {
       console.log(error)
       return res.status(500).json({ error: true, code: 500, message: "Erro interno no servidor" });

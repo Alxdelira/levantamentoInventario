@@ -3,6 +3,7 @@ import itens from "./itemRoutes.js";
 import setores from "./setorRoutes.js";
 import inventario from "./inventarioRoutes.js";
 import rotas from "./rotaRoutes.js";
+import login from "./loginRouter.js";
 
 
 const routes = (app) => {
@@ -14,7 +15,8 @@ const routes = (app) => {
     itens,
     setores,
     inventario,
-    rotas
+    rotas,
+    login
   )
 }
 
