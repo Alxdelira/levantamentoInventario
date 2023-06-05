@@ -36,27 +36,56 @@ export default class UsuarioController {
       }
       if (nome) {
         const usuarios = await Usuario.paginate({ nome: RegExp(nome, "i") }, options);
+        if (usuarios.totalDocs === 0) {
+          return res.status(404).json({ error: true, code: 404, message: "Usuário não encontrado" });
+        }
         return res.status(200).json(usuarios);
-      } else if (usuarios.totalDocs === 0) {
-        return res.status(404).json({ message: "Não Encontrado!" });
       }
       if (email) {
         const usuarios = await Usuario.paginate({ email: RegExp(email, "i") }, options);
         if (usuarios.totalDocs === 0) {
-          return res.status(404).json({ message: "Não Encontrado!" });
+          return res.status(404).json({ error: true, code: 404, message: "Usuário não encontrado" });
         }
+        return res.status(200).json(usuarios);
       }
       if (nome && email) {
         const usuarios = await Usuario.paginate({ nome: RegExp(nome, "i"), email: RegExp(email, "i") }, options);
         if (usuarios.totalDocs === 0) {
-          return res.status(404).json({ message: "Não Encontrado!" });
+          return res.status(404).json({ error: true, code: 404, message: "Usuário não encontrado" });
         }
+        return res.status(200).json(usuarios);
       }
       if (ativo == true) {
         const usuarios = await Usuario.paginate({ ativo: true }, options);
-        if (usuarios.totalDocs === 0) {
-          return res.status(404).json({ message: "Não Encontrado!" });
-        }
+        return res.status(200).json(usuarios);
+      }
+      if (ativo == false) {
+        const usuarios = await Usuario.paginate({ ativo: false }, options);
+        return res.status(200).json(usuarios);
+      }
+      if (nome && ativo == true) {
+        const usuarios = await Usuario.paginate({ nome: RegExp(nome, "i"), ativo: true }, options);
+        return res.status(200).json(usuarios);
+      }
+      if (nome && ativo == false) {
+        const usuarios = await Usuario.paginate({ nome: RegExp(nome, "i"), ativo: false }, options);
+        return res.status(200).json(usuarios);
+      }
+      if (email && ativo == true) {
+        const usuarios = await Usuario.paginate({ email: RegExp(email, "i"), ativo: true }, options);
+        return res.status(200).json(usuarios);
+      }
+      if (email && ativo == false) {
+        const usuarios = await Usuario.paginate({ email: RegExp(email, "i"), ativo: false }, options);
+        return res.status(200).json(usuarios);
+      }
+      if (nome && email && ativo == true) {
+        const usuarios = await Usuario.paginate({ nome: RegExp(nome, "i"), email: RegExp(email, "i"), ativo: true }, options);
+        return res.status(200).json(usuarios);
+      }
+      if (nome && email && ativo == false) {
+        const usuarios = await Usuario.paginate({ nome: RegExp(nome, "i"), email: RegExp(email, "i"), ativo: false }, options);
+        return res.status(200).json(usuarios);
       }
 
       const usuarios = await Usuario.paginate({}, options);
