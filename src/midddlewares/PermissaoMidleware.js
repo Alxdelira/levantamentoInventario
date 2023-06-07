@@ -26,16 +26,7 @@ class PermissaoMidleware {
             return res.status(401).json({ code: 401, message: "Usuário inativo!" })
         }
 
-        // carrega somente as rotas que o usuário tem permissão
-        for (let i = 0; i < usuarioPefil.rotas.length; i++) {
-            if (usuarioPefil.rotas[i].rota === rota_acessada) {
-                if (usuarioPefil.rotas[i]["verbo_" + verbo]) {
-                    return await callback();
-                } else {
-                    return res.status(403).json({ error: true, code: 403, message: "Você não tem permissão para acessar esta rota!" })
-                }
-            }
-        }
+      
     }
 }
 
