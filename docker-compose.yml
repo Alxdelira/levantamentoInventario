@@ -6,6 +6,6 @@ services:
       - 3000:3000
     environment:
       - PORT=3000
-      - DB_URL=mongodb+srv://UserCluster0:SenhaUserCluster0@cluster0.0nnxvt2.mongodb.net/DB_Levantamento_Patrimonial
+      - DB_URL="mongodb_url"
       - SECREAT=api-levantamento-patrimonial-7200
       - EXPIREIN=7200H
