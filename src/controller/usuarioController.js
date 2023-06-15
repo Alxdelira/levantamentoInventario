@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 export default class UsuarioController {
   static cadastrarUsuario = async (req, res) => {
     try {
-      return await PermisMiddleware(req, res, async () => {
+     return await PermisMiddleware(req, res, async () => {
         const { nome, email, senha, ativo } = req.body;
 
         const novoUsuario = new Usuario({
