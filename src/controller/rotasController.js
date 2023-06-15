@@ -44,7 +44,7 @@ class RotaController {
 
   static cadastrarRota = async (req, res) => {
     try {
-      const rota = new rotas(req.body);
+      const rota = new Rotas(req.body);
       await rota.save();
 
       return res.status(201).send(rota.toJSON());
@@ -72,7 +72,7 @@ class RotaController {
     }
   }
 
-  static deletarRota = async (req, res) => {
+  static excluirRota = async (req, res) => {
     try {
       const { id } = req.params;
       const deletedRota = await Rotas.findByIdAndDelete(id);

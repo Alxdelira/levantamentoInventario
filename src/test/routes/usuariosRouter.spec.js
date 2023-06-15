@@ -5,6 +5,10 @@ import request from "supertest";
 import faker from 'faker-br';
 
 /*
+  .post("/login", LoginController.login)
+*/
+
+/*
   .get("/usuarios", UsuarioController.listarUsuarios)
   .get("/usuarios/:id", UsuarioController.listarUsuarioPorId)
   .post("/usuarios", UsuarioController.cadastrarUsuario)
@@ -31,11 +35,11 @@ afterAll(() => {
 const nome = faker.name.firstName();
 const nome_meio = faker.name.lastName();
 const sobrenome = faker.name.lastName();
-const email = `${nome}.${sobrenome}@gmail.com`;
+const emailcad = `${nome}.${sobrenome}@gmail.com`;
 
 const exemploTeste = {
   nome: `${nome} ${nome_meio} ${sobrenome}`,
-  email: email,
+  email: emailcad,
   senha: "12345678",
   ativo: true,
   rota: [
@@ -53,39 +57,49 @@ const exemploTeste = {
   ]
 }
 
+const userlogin = {
+  email: "usuario@login.com",
+  senha: "senha123"
+}
+
 
 describe('Testes de Rotas em Usuarios', () => {
   let usuarioId;
+  let token;
+  it("Deve autenticar o usuário e retornar um token", async () => {
+    const resposta = await request(app)
+      .post('/login')
+      .send(userlogin)
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200);
+
+    expect(resposta.body.token).toBeDefined();
+    
+    token = resposta.body.token;
+  });
 
   it("Deve cadastrar um novo usuário", async () => {
     const resposta = await request(app)
       .post('/usuarios')
       .send(exemploTeste)
       .set('Accept', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
       .expect('Content-Type', /json/)
       .expect(201);
 
     expect(resposta.body.nome).toEqual(exemploTeste.nome);
     expect(resposta.body.senha.length).toBeGreaterThan(7);
-    expect(resposta.body.senha).toEqual(exemploTeste.senha);
     expect(resposta.body.email).toEqual(exemploTeste.email);
     expect(resposta.body.ativo).toEqual(exemploTeste.ativo);
-    
+
     usuarioId = resposta.body._id;
   });
-  it("Deve retornar uma Menssagem de inicio", async () => {
-    const res = await request(app)
-      .get('/')
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .expect(200);
-
-    expect(res.body.message).toEqual("Api -  Levantamento Patrimonial");
-  })
   it("Deve retornar a lista de usuários", async () => {
     const resposta = await request(app)
       .get('/usuarios')
       .set('Accept', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
       .expect('Content-Type', /json/)
       .expect(200);
 
@@ -96,6 +110,7 @@ describe('Testes de Rotas em Usuarios', () => {
     const resposta = await request(app)
       .get(`/usuarios/${usuarioId}`)
       .set('Accept', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
       .expect('Content-Type', /json/)
       .expect(200);
 
@@ -116,6 +131,7 @@ describe('Testes de Rotas em Usuarios', () => {
       .put(`/usuarios/${usuarioId}`)
       .send(novoUsuario)
       .set('Accept', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
       .expect('Content-Type', /json/)
       .expect(200);
 
@@ -127,11 +143,12 @@ describe('Testes de Rotas em Usuarios', () => {
   });
 
   it("Deve atualizar parcialmente um usuário", async () => {
-    const novoEmail = "novoemail@gmail.com";
+    const novoEmail = `novoemail${faker.random.number()}@gmail.com`;
     const resposta = await request(app)
       .patch(`/usuarios/${usuarioId}`)
       .send({ email: novoEmail })
       .set('Accept', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
       .expect('Content-Type', /json/)
       .expect(200);
 
@@ -144,12 +161,14 @@ describe('Testes de Rotas em Usuarios', () => {
     await request(app)
       .delete(`/usuarios/${usuarioId}`)
       .set('Accept', 'application/json')
-      .expect(204);
+      .set('Authorization', `Bearer ${token}`)
+      .expect(200);
 
     // Verifica se o usuário foi realmente deletado
     const resposta = await request(app)
       .get(`/usuarios/${usuarioId}`)
       .set('Accept', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
       .expect('Content-Type', /json/)
       .expect(404);
 

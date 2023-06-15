@@ -5,6 +5,20 @@ export default class InventarioController {
         try {
             const { setor, itens, criadoEm } = req.body
 
+            const erros = [];
+
+            if (!setor) {
+                erros.push({email: "error", message: "Setor não informado" });
+            }
+
+            if (!itens) {
+                erros.push({zip_code: "error", message: "Itens não informado" });
+            }
+
+            if (erros.length > 0) {
+                return res.status(400).json(erros);
+            }
+
             const novoInventario = new Inventario({
                 setor,
                 itens,
@@ -84,7 +98,25 @@ export default class InventarioController {
         try {
 
             const { id } = req.params
-            const { setor, item: itens, criadoEm } = req.body;
+            const { setor, itens: itens, criadoEm } = req.body;
+
+            const erros = [];
+
+            if (!setor) {
+                erros.push({email: "error", message: "Setor não informado" });
+            }
+
+            if (!itens) {
+                erros.push({zip_code: "error", message: "Itens não informado" });
+            }
+
+            if (!criadoEm) {
+                erros.push({zip_code: "error", message: "Data não informado" });
+            }
+
+            if (erros.length > 0) {
+                return res.status(400).json(erros);
+            }
 
             const inventarioAtualizado = await Inventario.findByIdAndUpdate(
                 id,
@@ -103,6 +135,7 @@ export default class InventarioController {
 
         }
     }
+    
     static atualizarInventarioParcial = async (req, res) => {
         try {
             const { id } = req.params;
@@ -123,6 +156,7 @@ export default class InventarioController {
             return res.status(500).json({ error: true, code: 500, message: "Erro interno no servidor" });
         }
     }
+    
     static deletarInventario = async (req, res) => {
         try {
             const { id } = req.params
@@ -132,7 +166,7 @@ export default class InventarioController {
                 return res.status(404).json({ error: true, code: 404, message: "Inventario não encontrado" })
             }
 
-            return res.status(204).json({ message: "Inventario removido com sucesso!" })
+            return res.status(200).json({ message: "Inventario removido com sucesso!" })
         } catch (error) {
             return res.status(500).json({ error: true, code: 500, message: "Erro Interno no Servidor" })
         }
