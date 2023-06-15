@@ -1,147 +1,204 @@
 import Setor from "../models/setor.js";
 
 class SetorController {
-
-  static cadastrarSetores = async (req, res) => {
+  static async listarSetores(req, res) {
     try {
-
-      const { nome, bloco, ativo } = req.body
-
-      const novoSetor = new Setor({
-        nome, bloco, ativo
-      });
-
-      if (!nome || !bloco || !ativo) {
-        return res.status(400).json({ error: true, code: 400, message: "Necessario preencher todos os campos" })
-      }
-
-      const setorsalvo = await novoSetor.save()
-      return res.status(201).json(novoSetor);
-
-    } catch (error) {
-      return res.status(500).json({ error: true, code: 500, message: "Erro Interno Servidor" })
-    }
-  }
-
-  static listarSetores = async (req, res) => {
-    try {
-
-      const { nome, bloco, ativo } = req.query
-      const { page, perPage } = req.query;
+      const nome = req.query.nome;
+      const bloco = req.query.bloco;
+      const ativo = req.query.ativo;
+      const page = req.query.page;
+      const perPage = req.query.perPage;
 
       const options = {
         page: parseInt(page) || 1,
-        limit: parseInt(perPage) > 10 ? 10 : parseInt(perPage) || 10
-      }
+        limit: parseInt(perPage) > 10 ? 10 : parseInt(perPage) || 10,
+      };
 
       if (nome) {
-        const setor = await Setor.paginate({ nome: RegExp(nome, "i") }, options);
-        if (setor.totalDocs === 0) {
-          return res.status(404).json({ message: "Não Encontrado!" });
-        }
+        const setor = await Setor.paginate(
+          { nome: RegExp(nome, "i") },
+          options
+        );
+        return res.status(200).json(setor);
       }
 
       if (bloco) {
-        const bloco = await Setor.paginate({ bloco: RegExp(bloco, "i") }, options);
-        if (setor.totalDocs === 0) {
-          return res.status(404).json({ message: "Não Encontrado!" });
-        }
+        const bloco = await Setor.paginate(
+          { bloco: RegExp(bloco, "i") },
+          options
+        );
+        return res.status(200).json(bloco);
       }
 
       if (ativo) {
-        const ativo = await Setor.paginate({ ativo: ativo }, options);
-        if (setor.totalDocs === 0) {
-          return res.status(404).json({ message: "Não Encontrado!" });
-        }
+        const ativo = await Setor.paginate(
+          { ativo: RegExp(ativo, "i") },
+          options
+        );
+        return res.status(200).json(ativo);
       }
 
       const setor = await Setor.paginate({}, options);
       return res.status(200).json(setor);
-
     } catch (err) {
-      return res.status(500).json({ error: true, code: 500, message: "Erro interno do servidor" });
+      return res
+        .status(500)
+        .json({ error: true, code: 500, message: "Erro interno do servidor" });
     }
   }
 
-  static listarSetoresId = async (req, res) => {
+  static async listarSetoresPorId(req, res) {
     try {
       const { id } = req.params;
 
+      if (id.length !== 24) {
+        return res
+          .status(400)
+          .json({ error: true, code: 400, message: "ID inválido" });
+      }
       const setor = await Setor.findById(id);
 
+
       if (!setor) {
-        return res.status(404).json({ error: true, code: 404, message: "Setor não encontrado" });
+        return res
+          .status(404)
+          .json({ error: true, code: 404, message: "Setor não encontrado" });
       }
+
       return res.status(200).json(setor);
-
-    } catch (error) {
-      return res.status(500).json({ error: true, code: 500, message: "Erro Interno no Servidor" })
+    } catch (err) {
+      console.log(err);
+      return res
+        .status(500)
+        .json({ error: true, code: 500, message: "Erro interno do servidor" });
     }
   }
 
-  static atualizarSetor = async (req, res) => {
+  static async cadastrarSetores(req, res) {
+    try {
+      const { nome, bloco, ativo } = req.body;
+
+      const erros = [];
+
+      if (!nome) {
+        erros.push({ email: "error", message: "Nome não informado" });
+      }
+
+      if (!bloco) {
+        erros.push({ zip_code: "error", message: "Bloco não informado" });
+      }
+
+      if (!ativo) {
+        erros.push({ email: "error", message: "Ativo não informado" });
+      }
+
+      if (erros.length > 0) {
+        return res.status(400).json(erros);
+      }
+
+      const setor = new Setor({
+        nome,
+        bloco,
+        ativo,
+      });
+
+      await setor.save();
+
+      return res.status(201).json(setor);
+    } catch (err) {
+      return res
+        .status(500)
+        .json({ error: true, code: 500, message: "Erro interno do servidor" });
+    }
+  }
+
+  static async atualizarSetoresPorId(req, res) {
     try {
       const { id } = req.params;
-      const { nome, bloco, ativo } = req.body
+      const { nome, bloco, ativo } = req.body;
 
-      const setorAtualizado = await Setor.findByIdAndUpdate(
+      const erros = [];
+
+      if (!nome) {
+        erros.push({ email: "error", message: "Nome não informado" });
+      }
+
+      if (!bloco) {
+        erros.push({ zip_code: "error", message: "Bloco não informado" });
+      }
+
+      if (!ativo) {
+        erros.push({ email: "error", message: "Ativo não informado" });
+      }
+
+      if (erros.length > 0) {
+        return res.status(400).json(erros);
+      }
+
+      const setor = await Setor.findByIdAndUpdate(
         id,
-        { nome, bloco, ativo },
+        {
+          nome,
+          bloco,
+          ativo,
+        },
         { new: true }
       );
 
-      if (!setorAtualizado) {
-        return res.status(404).json({ error: true, code: 404, message: "Setor não encontrado" });
+      if (!setor) {
+        return res
+          .status(404)
+          .json({ error: true, code: 404, message: "Setor não encontrado" });
       }
 
-      return res.status(200).json(setorAtualizado);
-    } catch (error) {
-      console.log(error)
-      return res.status(500).json({ error: true, code: 500, message: "Erro interno no servidor" });
+      return res.status(200).json(setor);
+    } catch (err) {
+      return res
+        .status(500)
+        .json({ error: true, code: 500, message: "Erro interno do servidor" });
     }
   }
 
+  static async atualizarSetoresParcial(req, res) {
+    try {
+      const { id } = req.params;
+      const updates = req.body;
 
-  static deletarSetor = async (req, res) => {
+      const setor = await Setor.findByIdAndUpdate(id, updates, { new: true });
+
+      if (!setor) {
+        return res
+          .status(404)
+          .json({ error: true, code: 404, message: "Setor não encontrado" });
+      }
+
+      return res.status(200).json(setor);
+    } catch (err) {
+      return res
+        .status(500)
+        .json({ error: true, code: 500, message: "Erro interno do servidor" });
+    }
+  }
+
+  static async deleteSetores(req, res) {
     try {
       const { id } = req.params;
 
-      const setorRemovido = await Setor.findByIdAndRemove(id);
+      const setor = await Setor.findByIdAndDelete(id);
 
-      if (!setorRemovido) {
-        return res.status(404).json({ error: true, code: 404, message: "Setor não encontrado" });
+      if (!setor) {
+        return res
+          .status(404)
+          .json({ error: true, code: 404, message: "Setor não encontrado" });
       }
 
-      return res.status(204).json({ message: "Setor removido com sucesso" });
-
-    } catch (error) {
-      return res.status(500).json({ error: true, code: 500, message: "Erro interno no servidor" });
+      return res.status(200).json({ message: "Setor excluído com sucesso" });
+    } catch (err) {
+      return res
+        .status(500)
+        .json({ error: true, code: 500, message: "Erro interno do servidor" });
     }
   }
-
-  static atualizarSetorPatch = async (req, res) => {
-    try {
-      const { id } = req.params;
-      const updateData = req.body;
-
-      const setorAtualizado = await Setor.findByIdAndUpdate(
-        id,
-        updateData,
-        { new: true }
-      );
-
-      if (!setorAtualizado) {
-        return res.status(404).json({ error: true, code: 404, message: "Setor não encontrado" });
-      }
-
-      return res.status(200).json(setorAtualizado);
-    } catch (error) {
-      console.log(error)
-      return res.status(500).json({ error: true, code: 500, message: "Erro interno no servidor" });
-    }
-  }
-
-
 }
 
 export default SetorController;

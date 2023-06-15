@@ -16,9 +16,18 @@ const usuarioSchema = new mongoose.Schema({
     }
   },
   // Verificar com o Cliente se será necessario numero minimo de caracteres para senha. Por padrão coloquei 8.
-  senha: { type: String, minlength: 8, required: true, select: false },
+  senha: { type: String, required: true, select: false },
   ativo: { type: Boolean, default: false },
   // Colocar o Arquivo rotas.js no models posteriormente.
+  rota: [{
+    _id: { type: mongoose.Schema.Types.ObjectId, ref: 'rotas' },
+    rota: { type: String, required: true, trim: true },
+    verbo_get: { type: Boolean },
+    verbo_put: { type: Boolean },
+    verbo_patch: { type: Boolean },
+    verbo_delete: { type: Boolean },
+    verbo_post: { type: Boolean }
+  }]
 });
 
 // Configurações do modelo para que seja usada para buscar dados de usuário de forma paginada em nossa aplicação

@@ -126,17 +126,17 @@ describe('Testes de Rotas em Itens', () => {
         await request(app)
           .delete(`/itens/${itensId}`)
           .set('Accept', 'application/json')
-          .expect(204);
+          .expect(200);
     
         // Verifica se o usuário foi realmente deletado
         const resposta = await request(app)
-          .get(`/usuarios/${itensId}`)
+          .get(`/itens/${itensId}`)
           .set('Accept', 'application/json')
           .expect('Content-Type', /json/)
           .expect(404);
     
         expect(resposta.body.error).toBe(true);
         expect(resposta.body.code).toEqual(404);
-        expect(resposta.body.message).toEqual("Usuário não encontrado");
+        expect(resposta.body.message).toEqual("Item não encontrado");
       });
 });

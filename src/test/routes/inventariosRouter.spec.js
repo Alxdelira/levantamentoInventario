@@ -32,13 +32,13 @@ describe('Teste de Rotas em Inventarios', () => {
             .set('Accept', 'aplication/json')
             .expect('content-type', /json/)
             .expect(201);
-        console.log(res.body.itens)
+        
         expect(res.body.setor).toEqual(exempleTeste.setor)
         expect(res.body.itens.length).toEqual(exempleTeste.itens.length)
         expect(res.body.criadoEm).toEqual(exempleTeste.criadoEm)
 
         idIventario = res.body._id;
-        console.log(idIventario)
+       
     });
 
     it("/.GET Deve retornar uma lista de Iventario", async () => {
@@ -85,7 +85,7 @@ describe('Teste de Rotas em Inventarios', () => {
         expect(res.body.itens.length).toEqual(novoInventario.itens.length);
         expect(res.body.criadoEm).toEqual(novoInventario.criadoEm);
 
-        console.log(novoInventario)
+        
     });
 
     it("/.PATCH Deve atualizar parcialmente um inventario", async () => {
@@ -100,7 +100,7 @@ describe('Teste de Rotas em Inventarios', () => {
       
         expect(res.body._id).toEqual(idIventario);
         expect(res.body.itens.length).toEqual(exempleTeste.itens.length);
-        console.log(exempleTeste.itens); 
+         
       });
       
 
@@ -110,7 +110,7 @@ describe('Teste de Rotas em Inventarios', () => {
         await request(app)
             .delete(`/inventarios/${idIventario}`)
             .set('Accept', 'application/json')
-            .expect(204);
+            .expect(200);
 
         // Verifica se o usuário foi realmente deletado
         const res = await request(app)

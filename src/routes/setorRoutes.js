@@ -4,12 +4,11 @@ import SetorController from "../controller/setorController.js";
 const router = express.Router();
 
 router
-  .post("/setores", SetorController.cadastrarSetores)
-  .get("/setores", SetorController.listarSetores)
-  .get("/setores/:id", SetorController.listarSetoresId)
-  .put("/setores/:id",SetorController.atualizarSetor)
-  .patch("/setores/:id", SetorController.atualizarSetorPatch)
-  .delete("/setores/:id", SetorController.deletarSetor)
+.get("/setores",SetorController.listarSetores)
+.get("/setores/:id",SetorController.listarSetoresPorId)
+.post("/setores",SetorController.cadastrarSetores)
+.put("/setores/:id",SetorController.atualizarSetoresPorId)
+.patch("/setores/:id",SetorController.atualizarSetoresParcial)
+.delete("/setores/:id",SetorController.deleteSetores)
 
-
-export default router;
+export default router

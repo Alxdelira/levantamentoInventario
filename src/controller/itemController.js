@@ -6,6 +6,37 @@ export default class ItemController {
   static cadastrarItem = async (req, res) => {
     try {
       const { etiqueta, naoEtiquetado, encontrado, nome, setor, estado, descricao, responsavel, image, ativo } = req.body
+      
+      const erros = [];
+
+      if (!nome) {
+        erros.push({email: "error", message: "Nome não informado" });
+      }
+
+      if (!setor) {
+        erros.push({zip_code: "error", message: "Setor não informado" });
+      }
+
+      if (!estado) {
+        erros.push({email: "error", message: "Estado não informado" });
+      }
+
+      if (!descricao) {
+        erros.push({zip_code: "error", message: "Descrição não informado" });
+      }
+
+      if (!responsavel) {
+        erros.push({email: "error", message: "Responsável não informado" });
+      }
+
+      if (!ativo) {
+        erros.push({zip_code: "error", message: "Ativo não informado" });
+      }
+
+      if (erros.length > 0) {
+        return res.status(400).json(erros);
+      }
+
 
       const novoItem = new Item({
         etiqueta,
@@ -138,6 +169,36 @@ export default class ItemController {
       const { id } = req.params;
       const { etiqueta, naoEtiquetado, encontrado, nome, setor, estado, descricao, responsavel, image, ativo } = req.body
 
+      const erros = [];
+
+      if (!nome) {
+        erros.push({email: "error", message: "Nome não informado" });
+      }
+
+      if (!setor) {
+        erros.push({zip_code: "error", message: "Setor não informado" });
+      }
+
+      if (!estado) {
+        erros.push({email: "error", message: "Estado não informado" });
+      }
+
+      if (!descricao) {
+        erros.push({zip_code: "error", message: "Descrição não informado" });
+      }
+
+      if (!responsavel) {
+        erros.push({email: "error", message: "Responsável não informado" });
+      }
+
+      if (!ativo) {
+        erros.push({zip_code: "error", message: "Ativo não informado" });
+      }
+
+      if (erros.length > 0) {
+        return res.status(400).json(erros);
+      }
+
       const itemAtualizado = await Item.findByIdAndUpdate(
         id,
         { etiqueta, naoEtiquetado, encontrado, nome, setor, estado, descricao, responsavel, image, ativo },
@@ -155,7 +216,6 @@ export default class ItemController {
     }
   }
 
-
   static deletarItem = async (req, res) => {
     try {
       const { id } = req.params;
@@ -166,7 +226,7 @@ export default class ItemController {
         return res.status(404).json({ error: true, code: 404, message: "Item não encontrado" });
       }
 
-      return res.status(204).json({ message: "Item removido com sucesso" });
+      return res.status(200).json({ message: "Item removido com sucesso" });
 
     } catch (error) {
       return res.status(500).json({ error: true, code: 500, message: "Erro interno no servidor" });
@@ -196,5 +256,3 @@ export default class ItemController {
   }
 
 }
-
-

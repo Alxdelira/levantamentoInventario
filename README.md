@@ -47,6 +47,15 @@ npm install mongoose
 ```
  npm install supertest --save-dev
 ```
+* Nodemon
+```
+ npm install nodemon
+```
+* Jsonwebtoken
+```
+ npm install jsonwebtoken
+```
+
 
 ## :rocket: Rodando o projeto
 Para rodar o repositório é necessário clonar o mesmo, dar o seguinte comando para iniciar o projeto:
