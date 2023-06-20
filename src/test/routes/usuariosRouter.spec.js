@@ -75,8 +75,50 @@ describe('Testes de Rotas em Usuarios', () => {
       .expect(200);
 
     expect(resposta.body.token).toBeDefined();
-    
     token = resposta.body.token;
+  });
+  it("Deve retornar erro de autenticação", async () => {
+    const resposta = await request(app)
+      .post('/login')
+      .send({ email: "emailNoExist@gmail.com", senha: "senha123" })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(404);
+    expect(resposta.body.token).not.toBeDefined();
+    expect(resposta.body.message).toEqual("Usuário e/ou senha inválidos");
+  });
+
+  it("Deve retornar erro de autenticação", async () => {
+    const resposta = await request(app)
+      .post('/login')
+      .send({ email: userlogin.email, senha: "senha1234" })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(401);
+    expect(resposta.body.token).not.toBeDefined();
+    expect(resposta.body.message).toEqual("Usuário e/ou senha inválidos");
+  });
+
+  it("Deve retornar erro de autenticação", async () => {
+    const resposta = await request(app)
+      .post('/login')
+      .send({ email: userlogin.email, senha: "" })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(400);
+    expect(resposta.body.token).not.toBeDefined();
+    expect(resposta.body.message).toEqual("Usuário e/ou senha inválidos");
+  });
+
+  it ("Deve retornar erro de autenticação não Autorizado", async () => {
+    const resposta = await request(app)
+      .post('/usuarios')
+      .send(exemploTeste)
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(401);
+    expect(resposta.body.token).not.toBeDefined();
+    expect(resposta.body.message).toEqual("Não autorizado");
   });
 
   it("Deve cadastrar um novo usuário", async () => {
@@ -98,6 +140,28 @@ describe('Testes de Rotas em Usuarios', () => {
   it("Deve retornar a lista de usuários", async () => {
     const resposta = await request(app)
       .get('/usuarios')
+      .set('Accept', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
+      .expect('Content-Type', /json/)
+      .expect(200);
+
+    expect(resposta.body.docs.length).toBeGreaterThan(0);
+  });
+
+  it ("Deve retornar filtro de usuários", async () => {
+    const resposta = await request(app)
+      .get(`/usuarios?nome=${nome}`)
+      .set('Accept', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
+      .expect('Content-Type', /json/)
+      .expect(200);
+
+    expect(resposta.body.docs.length).toBeGreaterThan(0);
+  });
+
+  it ("Deve retornar filtro de usuários", async () => {
+    const resposta = await request(app)
+      .get(`/usuarios?nome=${nome}&email=${emailcad}`)
       .set('Accept', 'application/json')
       .set('Authorization', `Bearer ${token}`)
       .expect('Content-Type', /json/)

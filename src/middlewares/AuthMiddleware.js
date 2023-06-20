@@ -13,13 +13,12 @@ const AuthMiddleware = async (req, res, next) => {
             return res.status(401).json({ error: true, code: 401, message: "Formato de token inválido" });
         }
 
-        const decoded = jwt.verify(token[1], process.env.SECRET);
+        const decoded = jwt.verify(token[1], process.env.JWT_SECRET);
 
         req.usuarioId = decoded.id;
 
         next();
     } catch (error) {
-        console.error(error);
         return res.status(401).json({ error: true, code: 401, message: "Não autorizado", detail: error.message });
     }
 };

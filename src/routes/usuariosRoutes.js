@@ -61,24 +61,65 @@ import AuthMiddlewares from "../middlewares/AuthMiddleware.js";
  *         name: nome
  *         schema:
  *           type: string
- *           description: Filtra pelo nome do usuário
+ *         description: Filtra pelo nome do usuário
  *       - in: query
  *         name: email
  *         schema:
  *           type: string
- *           description: Filtra pelo email do usuário
+ *         description: Filtra pelo email do usuário
  *       - in: query
  *         name: ativo
  *         schema:
  *           type: boolean
- *           description: Filtra pelo status do usuário
+ *         description: Filtra pelo status do usuário
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *         description: Número da página
+ *       - in: query
+ *         name: perPage
+ *         schema:
+ *           type: integer
+ *         description: Quantidade de registros por página
  *     responses:
  *       200:
  *         description: Lista de usuários
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 docs:
+ *                   type: array 
+ *                   items:
+ *                     $ref: '#/components/schemas/Usuario'
  *       404:
- *         description: Usuário não encontrado
+ *         description: Nenhum usuário encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: boolean 
+ *                 code: 
+ *                   type: integer
+ *                 message:
+ *                   type: string
  *       500:
  *         description: Erro interno no servidor
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: boolean 
+ *                 code: 
+ *                   type: integer
+ *                 message:
+ *                   type: string
  *   post:
  *     summary: Cadastra um novo usuário
  *     tags: [Usuarios]
@@ -125,10 +166,41 @@ import AuthMiddlewares from "../middlewares/AuthMiddleware.js";
  *     responses:
  *       201:
  *         description: Usuário cadastrado com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 docs:
+ *                   type: array 
+ *                   items:
+ *                     $ref: '#/components/schemas/Usuario'
  *       400:
- *         description: Necessário preencher todos os campos corretamente ou usuário já cadastrado
+ *         description: Necesário enviar todos os campos obrigatórios
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: boolean 
+ *                 code: 
+ *                   type: integer
+ *                 message:
+ *                   type: string
  *       500:
  *         description: Erro interno no servidor
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: boolean 
+ *                 code: 
+ *                   type: integer
+ *                 message:
+ *                   type: string
  * /usuarios/{id}:
  *   get:
  *     summary: Obtém um usuário pelo ID
@@ -143,8 +215,28 @@ import AuthMiddlewares from "../middlewares/AuthMiddleware.js";
  *     responses:
  *       200:
  *         description: Usuário encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 docs:
+ *                   type: array 
+ *                   items:
+ *                     $ref: '#/components/schemas/Usuario'
  *       404:
- *         description: Usuário não encontrado
+ *         description: Nenhum usuário encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: boolean 
+ *                 code: 
+ *                   type: integer
+ *                 message:
+ *                   type: string
  *   put:
  *     summary: Atualiza um usuário pelo ID
  *     tags: [Usuarios]
@@ -177,10 +269,54 @@ import AuthMiddlewares from "../middlewares/AuthMiddleware.js";
  *     responses:
  *       200:
  *         description: Usuário atualizado com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 docs:
+ *                   type: array 
+ *                   items:
+ *                     $ref: '#/components/schemas/Usuario'
  *       400:
- *         description: Necessário preencher todos os campos corretamente
+ *         description: necessário enviar todos os campos obrigatórios
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: boolean 
+ *                 code: 
+ *                   type: integer
+ *                 message:
+ *                   type: string
+ *       500:
+ *         description: Erro interno no servidor
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: boolean 
+ *                 code: 
+ *                   type: integer
+ *                 message:
+ *                   type: string
  *       404:
  *         description: Usuário não encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: boolean 
+ *                 code: 
+ *                   type: integer
+ *                 message:
+ *                   type: string
  *   patch:
  *     summary: Atualiza parcialmente um usuário pelo ID
  *     tags: [Usuarios]
@@ -201,11 +337,55 @@ import AuthMiddlewares from "../middlewares/AuthMiddleware.js";
  *             nome: "Novo nome de usuário Autalizado Parcialmente"
  *     responses:
  *       200:
- *         description: Usuário atualizado com sucesso
+ *         description: usuário atualizado com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 docs:
+ *                   type: array 
+ *                   items:
+ *                     $ref: '#/components/schemas/Usuario'
  *       400:
- *         description: Necessário preencher pelo menos um campo válido para atualização
+ *         description: necessário enviar todos os campos obrigatórios
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: boolean 
+ *                 code: 
+ *                   type: integer
+ *                 message:
+ *                   type: string
+ *       500:
+ *         description: Erro interno no servidor
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: boolean 
+ *                 code: 
+ *                   type: integer
+ *                 message:
+ *                   type: string
  *       404:
  *         description: Usuário não encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: boolean 
+ *                 code: 
+ *                   type: integer
+ *                 message:
+ *                   type: string
  *   delete:
  *     summary: Deleta um usuário pelo ID
  *     tags: [Usuarios]
@@ -219,8 +399,28 @@ import AuthMiddlewares from "../middlewares/AuthMiddleware.js";
  *     responses:
  *       200:
  *         description: Usuário deletado com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 code: 
+ *                   type: integer 
+ *                 message:
+ *                   type: string
  *       404:
  *         description: Usuário não encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: boolean 
+ *                 code: 
+ *                   type: integer
+ *                 message:
+ *                   type: string
  */
 
 

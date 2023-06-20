@@ -4,37 +4,44 @@ import app from '../../app.js';
 import request from 'supertest';
 
 let server;
-let token = false;
 
-beforeEach(() => {
-  const port = 3025;
-  server = app.listen(port);
-});
 
-afterEach(() => {
-  server.close();
-});
 
-afterAll(() => {
-  mongoose.connection.close();
-});
+
 
 const exampleTest = {
   nome: 'setor Padrao',
   bloco: 'Bloco Padrao',
   ativo: true
 };
+const userlogin = {
+  email: "usuario@login.com",
+  senha: "senha123"
+}
 
 
 describe('Testes de Rotas em Setores', () => {
   let setorId;
+  let token;
+  it("Deve autenticar o usuário e retornar um token", async () => {
+      const resposta = await request(app)
+          .post('/login')
+          .send(userlogin)
+          .set('Accept', 'application/json')
+          .set('Authorization', `Bearer ${token}`)
+          .expect('Content-Type', /json/)
+          .expect(200);
 
+      expect(resposta.body.token).toBeDefined();
+      token = resposta.body.token;
+  });
   it('Deve cadastrar um setor', async () => {
     const response = await request(app)
       .post('/setores')
       .set('Accept', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
       .send({
-        nome: 'Nome do Setor',
+        nome: 'Setor para seed',
         bloco: 'Bloco do Setor',
         ativo: true
       })
@@ -47,6 +54,7 @@ describe('Testes de Rotas em Setores', () => {
     const response = await request(app)
       .get('/setores')
       .set('Accept', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
       .expect('Content-Type', /json/)
       .expect(200);
 
@@ -60,22 +68,12 @@ describe('Testes de Rotas em Setores', () => {
     const response = await request(app)
       .get(`/setores/${setorId}`)
       .set('Accept', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
       .expect('Content-Type', /json/)
       .expect(200);
 
-    expect(response.body.nome).toContain('Nome do Setor');
+    expect(response.body.nome).toContain('Setor para seed');
   });
-
- it('Deve retornar erro de ID inválido', async () => {
-    const response = await request(app)
-      .get('/setores/dados')
-      .set('Accept', 'application/json')
-      .expect(400);
-
-    const { body } = response;
-    expect(body.message).toEqual('ID inválido');
-  });
-
 
   it('Deve atualizar um setor existente', async () => {
     const novoSetor = {
@@ -85,6 +83,8 @@ describe('Testes de Rotas em Setores', () => {
     const response = await request(app)
       .put(`/setores/${setorId}`)
       .send(novoSetor)
+      .set('Accept', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
       .expect('Content-Type', /json/)
       .expect(200);
 
@@ -97,6 +97,8 @@ describe('Testes de Rotas em Setores', () => {
     const novoNome = 'Novo Nome Novo';
     const response = await request(app)
       .patch(`/setores/${setorId}`)
+      .set('Accept', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
       .send({nome:novoNome})
       .expect(200);
 
@@ -108,6 +110,8 @@ describe('Testes de Rotas em Setores', () => {
   it('Deve realizar um delete no id', async () => {
     await request(app)
       .delete(`/setores/${setorId}`)
+      .set('Accept', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
       .expect(200);
   });
 

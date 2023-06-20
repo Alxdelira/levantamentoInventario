@@ -7,5 +7,5 @@ services:
     environment:
       - PORT=3000
       - DB_URL="mongodb_url"
-      - SECREAT=api-levantamento-patrimonial-7200
+      - SECREAT="secreat"
       - EXPIREIN=7200H

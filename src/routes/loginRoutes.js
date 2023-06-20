@@ -23,7 +23,7 @@ const router = express.Router();
  *               senha:
  *                 type: string
  *             example:
- *              email: "alexandre@nogueira.com"
+ *              email: "usuario@login.com"
  *              senha: "senha123"
  *     responses:
  *       200:
