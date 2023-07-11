@@ -76,8 +76,7 @@ Comando para iniciar os testes unitarios e de integração:
 ```
 
 ## :soon: Implementação futura
-* 
-
+* Implementação de um metodo de validação para grupos de usuarios;
 ## :handshake: Colaboradores
 <table>
   <tr>
