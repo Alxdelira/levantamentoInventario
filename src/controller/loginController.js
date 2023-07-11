@@ -1,6 +1,7 @@
 import Usuario from "../models/usuario.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import * as dotenv from  "dotenv";
 
 class LoginController {
   static logar = async (req, res) => {
@@ -27,6 +28,7 @@ class LoginController {
 
       return res.status(200).json({ token });
     } catch (error) {
+      console.log(error);
       return res.status(500).json({ error: true, code: 500, message: "Erro interno no servidor" });
     }
   };

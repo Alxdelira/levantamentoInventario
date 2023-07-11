@@ -235,7 +235,7 @@ const router = express.Router();
  *           schema:
  *             $ref: '#/components/schemas/Inventarios'
  *           example:
- *             itens: "6477cf3dc1beb3f224571ded"
+ *             itens: "648345f6421bf3b83436450d"
  *     responses:
  *       200:
  *         description: Item adicionado ao Inventário com sucesso
@@ -269,7 +269,7 @@ const router = express.Router();
  *           schema:
  *             $ref: '#/components/schemas/Inventarios'
  *           example:
- *             itens: "6477cf3dc1beb3f224571ded"
+ *             itens: "648345f6421bf3b83436450d"
  *     responses:
  *       200:
  *         description: Item removido com sucesso
