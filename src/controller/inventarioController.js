@@ -210,6 +210,29 @@ export default class InventarioController {
         }
     }
 
+    static removerItensInventarioParcial = async (req, res) => {
+        try {
+            return await PermisMiddleware(req, res, async () => {
+                const { id } = req.params;
+                const updateData = req.body;
+
+
+                const inventarioAtualizado = await Inventario.findByIdAndUpdate(
+                    id,
+                    { $pull: { "itens": updateData.itens } },
+                    { new: true }
+                );
+                if (!inventarioAtualizado) {
+                    return res.status(404).json({ error: true, code: 404, message: "Inventario não encontrado" });
+                }
+                return res.status(200).json(inventarioAtualizado);
+            });
+        } catch (error) {
+            return res
+            .status(500)
+            .json({ error: true, code: 500, message: "Erro interno no servidor" });
+        }
+    }
     static deletarInventario = async (req, res) => {
         try {
             return await PermisMiddleware(req, res, async () => {

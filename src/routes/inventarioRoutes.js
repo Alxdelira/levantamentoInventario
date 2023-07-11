@@ -52,7 +52,7 @@ const router = express.Router();
  *         schema:
  *           type: string
  *         description: Filtra pela data do Inventário (2023-05-31T22:50:37.893Z)
-  *       - in: query
+ *       - in: query
  *         name: page
  *         schema:
  *           type: integer
@@ -217,8 +217,6 @@ const router = express.Router();
  *       500:
  *         description: Erro interno no servidor
  * 
- * 
- * 
  * /inventarios/itens/{id}:
  *   patch:
  *     summary: Adiciona um item a um Inventário pelo ID
@@ -249,6 +247,41 @@ const router = express.Router();
  *         description: Erro interno no servidor
  */
 
+/**
+ * @swagger
+ * tags:
+ *  name: Inventarios
+ * /inventarios/itens/{id}:
+ *    delete:
+ *     summary: Remove um item de um Inventário pelo ID
+ *     tags: [Inventarios]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID do Inventário
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Inventarios'
+ *           example:
+ *             itens: "6477cf3dc1beb3f224571ded"
+ *     responses:
+ *       200:
+ *         description: Item removido com sucesso
+ *       401:
+ *         description: Não autorizado 
+ *       404:
+ *         description: Item ou Inventário não encontrado
+ *       500:
+ *         description: Erro interno no servidor
+ * 
+ */
+
 
 
 router
@@ -258,6 +291,7 @@ router
   .put('/inventarios/:id',AuthMiddlewares,InventarioController.atualizarInventario)
   .patch('/inventarios/:id',AuthMiddlewares,InventarioController.atualizarInventarioParcial)
   .patch('/inventarios/itens/:id',AuthMiddlewares,InventarioController.adicionarItensInventarioParcial)
+  .delete('/inventarios/itens/:id',AuthMiddlewares,InventarioController.removerItensInventarioParcial)
   .delete('/inventarios/:id',AuthMiddlewares,InventarioController.deletarInventario)
 
 

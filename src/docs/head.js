@@ -3,14 +3,14 @@ const swaggerOptions = {
     openapi: "3.0.0",
     info: {
       title: "Api - Levantamento Patrimonial",
-      description: "Projeto para o Levantamento Patrimonial, feito em 2023 pela Turma de ADS 2022 na matéria de Fabrica de Software II",
+      description: "Projeto para o Levantamento Patrimonial, feito em 2023 para o Instituto Federal de Rondônia - IFRO",
       version: "1.0.0"
     },
     servers: [
       {
         url: 'http://localhost:3000',
         description: "Api - Levantamento Patrimonial",
-      }
+      },
     ],
     components: {
       securitySchemes: {

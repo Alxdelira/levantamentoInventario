@@ -12,10 +12,6 @@
     "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watchAll",
     "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watchAll --coverage"
   },
-  "repository": {
-    "type": "git",
-    "url": "ssh://git@gitlab.fslab.dev:4241/fs-ii-turma-2022-levantamento-patrimonial/levantamento-patrimonial.git"
-  },
   "author": "",
   "license": "ISC",
   "dependencies": {
