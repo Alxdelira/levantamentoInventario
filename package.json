@@ -4,6 +4,9 @@
   "description": "Projeto para o Levantamento Patrimonial, feito em 2023 por Alexandre Nogueira de Lira",
   "main": "server.js",
   "type": "module",
+  "engines": {
+    "node": "18"
+  },
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
