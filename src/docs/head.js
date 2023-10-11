@@ -8,6 +8,10 @@ const swaggerOptions = {
     },
     servers: [
       {
+        url: 'https://api-inventario-ynuc.onrender.com',
+        description: "Api - Levantamento Patrimonial",
+      },
+      {
         url: 'http://localhost:3001',
         description: "Api - Levantamento Patrimonial",
       },
