@@ -2,7 +2,6 @@ import usuarios from "./usuariosRoutes.js";
 import itens from "./itemRoutes.js";
 import setores from "./setorRoutes.js";
 import inventario from "./inventarioRoutes.js";
-import rotas from "./rotasRoutes.js";
 import login from "./loginRoutes.js";
 
 
@@ -15,7 +14,6 @@ const routes = (app) => {
     itens,
     setores,
     inventario,
-    rotas,
     login
   )
 }

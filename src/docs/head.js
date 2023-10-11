@@ -8,7 +8,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: 'http://localhost:3000',
+        url: 'http://localhost:3001',
         description: "Api - Levantamento Patrimonial",
       },
     ],
@@ -36,11 +36,6 @@ const swaggerOptions = {
       name: "Usuarios",
       description: "Operações para rota de Usuários"
     },
-    {
-      name: "Rotas",
-      description: "Operações para rota de Rotas"
-    },
-
     {
       name: "Setores",
       description: "Operações para rota de Setores"

@@ -13,7 +13,7 @@ const AuthMiddleware = async (req, res, next) => {
             return res.status(401).json({ error: true, code: 401, message: "Formato de token inválido" });
         }
 
-        const decoded = jwt.verify(token[1], process.env.JWT_SECRET);
+        const decoded = jwt.verify(token[1], process.env.SECRET);
 
         req.usuarioId = decoded.id;
 

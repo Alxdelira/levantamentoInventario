@@ -24,7 +24,7 @@ const router = express.Router();
  *                 type: string
  *             example:
  *              email: "alexandre@nogueira.com"
- *              senha: "senha123"
+ *              senha: "123"
  *     responses:
  *       200:
  *         description: Login realizado com sucesso

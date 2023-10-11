@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import * as dotenv from 'dotenv'; // necessário para leitura do arquivo de variáveis
+import * as dotenv from 'dotenv'; 
 
 dotenv.config();
 

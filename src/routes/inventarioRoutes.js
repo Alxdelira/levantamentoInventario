@@ -32,7 +32,7 @@ const router = express.Router();
  * tags:
  *   name: Inventarios
  *   description: Rotas relacionadas a Inventários
- * /Inventarios:
+ * inventarios:
  *   get:
  *     summary: Lista todos os Inventários
  *     tags: [Inventarios]
@@ -79,7 +79,7 @@ const router = express.Router();
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Inventarios'
+ *             $ref: '#/components/schemasinventarios'
  *           example:
  *             setor: "6477cf3bc1beb3f224571de8"
  *             itens: "6477cf3dc1beb3f224571ded"
@@ -92,7 +92,7 @@ const router = express.Router();
  *         description: Não autorizado 
  *       500:
  *         description: Erro interno no servidor
- * /Inventarios/{id}:
+ * inventarios/{id}:
  *   get:
  *     summary: Obtém um Inventário pelo ID
  *     tags: [Inventarios]
@@ -127,7 +127,7 @@ const router = express.Router();
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Inventarios'
+ *             $ref: '#/components/schemasinventarios'
  *           example:
  *             setor: "6477cf3bc1beb3f224571de6"
  *             itens: "6477cf3dc1beb3f224571ded"
@@ -158,7 +158,7 @@ const router = express.Router();
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Inventarios'
+ *             $ref: '#/components/schemasinventarios'
  *           example:
  *             setor: "6477cf3bc1beb3f224571de8"
  *     responses:
@@ -185,7 +185,7 @@ const router = express.Router();
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Inventarios'
+ *             $ref: '#/components/schemasinventarios'
  *           example:
  *             itens: "6477cf3dc1beb3f224571ded"
  *     responses:
@@ -217,7 +217,7 @@ const router = express.Router();
  *       500:
  *         description: Erro interno no servidor
  * 
- * /inventarios/itens/{id}:
+ * inventarios/itens/{id}:
  *   patch:
  *     summary: Adiciona um item a um Inventário pelo ID
  *     tags: [Inventarios]
@@ -233,7 +233,7 @@ const router = express.Router();
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Inventarios'
+ *             $ref: '#/components/schemasinventarios'
  *           example:
  *             itens: "648345f6421bf3b83436450d"
  *     responses:
@@ -251,7 +251,7 @@ const router = express.Router();
  * @swagger
  * tags:
  *  name: Inventarios
- * /inventarios/itens/{id}:
+ * inventarios/itens/{id}:
  *    delete:
  *     summary: Remove um item de um Inventário pelo ID
  *     tags: [Inventarios]
@@ -267,7 +267,7 @@ const router = express.Router();
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Inventarios'
+ *             $ref: '#/components/schemasinventarios'
  *           example:
  *             itens: "648345f6421bf3b83436450d"
  *     responses:
@@ -285,7 +285,7 @@ const router = express.Router();
 
 
 router
-  .post('/inventarios',AuthMiddlewares,InventarioController.cadastrarInventario)
+  .post('inventarios',AuthMiddlewares,InventarioController.cadastrarInventario)
   .get('/inventarios',AuthMiddlewares,InventarioController.listarInventarios)
   .get('/inventarios/:id',AuthMiddlewares,InventarioController.listarInventariosId)
   .put('/inventarios/:id',AuthMiddlewares,InventarioController.atualizarInventario)

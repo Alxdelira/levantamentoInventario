@@ -20,25 +20,6 @@ import AuthMiddlewares from "../middlewares/AuthMiddleware.js";
  *           type: string
  *         ativo:
  *           type: boolean
- *         rota:
- *           type: array
- *           items:
- *             type: object
- *             properties:
- *               _id:
- *                 type: string
- *               rota:
- *                 type: string
- *               verbo_get:
- *                 type: boolean
- *               verbo_put:
- *                 type: boolean
- *               verbo_patch:
- *                 type: boolean
- *               verbo_delete:
- *                 type: boolean
- *               verbo_post:
- *                 type: boolean
  *       required:
  *         - nome
  *         - email
@@ -134,35 +115,6 @@ import AuthMiddlewares from "../middlewares/AuthMiddleware.js";
  *             email: "usuarioDeTeste@example.com"
  *             senha: "senha123"
  *             ativo: true
- *             rota:
- *               - _id: "usuarios"
- *                 rota: "/usuarios"
- *                 verbo_get: true
- *                 verbo_put: true
- *                 verbo_patch: true
- *                 verbo_delete: true
- *                 verbo_post: true
- *               - _id: "inventarios"
- *                 rota: "/inventarios"
- *                 verbo_get: true
- *                 verbo_put: true
- *                 verbo_patch: true
- *                 verbo_delete: true
- *                 verbo_post: true
- *               - _id: "itens"
- *                 rota: "/itens"
- *                 verbo_get: true
- *                 verbo_put: true
- *                 verbo_patch: true
- *                 verbo_delete: true
- *                 verbo_post: true
- *               - _id: "setores"
- *                 rota: "/setores"
- *                 verbo_get: true
- *                 verbo_put: true
- *                 verbo_patch: true
- *                 verbo_delete: true
- *                 verbo_post: true
  *     responses:
  *       201:
  *         description: Usuário cadastrado com sucesso
@@ -258,14 +210,6 @@ import AuthMiddlewares from "../middlewares/AuthMiddleware.js";
  *             email: "emailNovo@novoemail.com"
  *             senha: "novasenha123"
  *             ativo: true
- *             rota:
- *               - _id: "usuarios"
- *                 rota: "/usuarios"
- *                 verbo_get: true
- *                 verbo_put: true
- *                 verbo_patch: true
- *                 verbo_delete: true
- *                 verbo_post: true
  *     responses:
  *       200:
  *         description: Usuário atualizado com sucesso

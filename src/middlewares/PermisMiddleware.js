@@ -13,7 +13,7 @@ const PermisMiddleware = async (req, res, next) => {
             return res.status(401).json({ error: true, code: 401, message: "Formato de token inválido" });
         }
 
-        const decoded = jwt.verify(token[1], process.env.JWT_SECRET);
+        const decoded = jwt.verify(token[1], process.env.SECRET);
         const usuario = await Usuario.findById(decoded.id);
         if (!usuario) {
             return res.status(404).json({ error: true, code: 404, message: "Usuário não encontrado" });

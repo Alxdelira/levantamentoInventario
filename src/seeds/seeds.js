@@ -3,7 +3,6 @@ import Setor from '../models/setor.js';
 import Item from '../models/item.js';
 import Inventario from '../models/inventario.js';
 import Usuarios from '../models/usuario.js';
-import rotas from '../models/rota.js';
 import db from '../config/dbConect.js';
 import bcrypt from "bcrypt"
 
@@ -157,55 +156,6 @@ await Inventario.insertMany(inventarios);
 console.log(inventarios.length + ' Inventários inseridos!');
 
 // ------------------------------------------------------------
-//eliminando as rotas existentes
-await rotas.deleteMany();
-
-// função para gerar array de objetos com dados fake para rotas
-const dadosRotas = [];
-
-// função para retornar o nome de uma rota pela posição do array
-let rotas_array = [
-    'setores', 'itens',
-    'usuarios', 'iventarios'
-]
-function getRotaName(i) {
-    return rotas_array[i].toString();
-}
-
-function seedRotas(qtdrotas) {
-    for (let i = 0; i < qtdrotas; i++) {
-        const rota = {
-            rota: getRotaName(i),
-            ativo: true,
-            verbos: {
-                get: true,
-                put: true,
-                patch: true,
-                delete: true,
-                post: true,
-            }
-        }
-        dadosRotas.push(rota);
-    }
-    return dadosRotas;
-}
-
-seedRotas(rotas_array.length);
-await rotas.collection.insertMany(dadosRotas);
-console.log(dadosRotas.length + ' Rotas inseridas!');
-
-// função para passar as rotas para os usuários
-const rotas_usuarios = [];
-function seedRotasUsuarios(qtd) {
-    // limpar array rotas_grupos
-    rotas_usuarios.length = 0;
-    for (let i = 0; i < (qtd); i++) {
-        rotas_usuarios.push(dadosRotas[i]);
-    }
-    return rotas_usuarios;
-};
-//_________________________________________________________
-
 // Usuario
 
 await Usuarios.deleteMany();
@@ -213,21 +163,10 @@ await Usuarios.deleteMany();
 const usuarios = [];
 
 const usuarioPadrao = {
-    nome: 'Mateus de Moraies',
-    email: 'mateus@gmail.dev',
-    senha: '123',
-    ativo: true,
-    rota: [{
-        rota: "padrão",
-        ativo: true,
-        verbos: {
-            get: true,
-            put: true,
-            patch: true,
-            delete: true,
-            post: true,
-        }
-    }], // Array vazio para armazenar as rotas
+    nome: 'Alexandre nogueira',
+    email: "alexandre@nogueira.com",
+    senha: senhaHash(),
+    ativo: true,   
 };
 
 usuarios.push(usuarioPadrao);
@@ -243,13 +182,7 @@ function seedUsuario(qtdusuarios) {
             nome: `${nome} ${nome_meio} ${sobrenome}`,
             email: email.toLowerCase(),
             senha: senhaHash(),
-            ativo: true,
-            rota: dadosRotas.map((rota) => {
-                return {
-                    rota: rota.rota,
-                    verbos: rota.verbos
-                };
-            }),
+            ativo: true,           
         };
 
         usuarios.push(seedUsuarios);

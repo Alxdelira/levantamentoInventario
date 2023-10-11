@@ -3,6 +3,8 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import * as dotenv from  "dotenv";
 
+dotenv.config()
+
 class LoginController {
   static logar = async (req, res) => {
     try {
@@ -22,7 +24,7 @@ class LoginController {
         return res.status(401).json({ error: true, code: 401, message: "Usuário e/ou senha inválidos"});
       }
 
-      const token = jwt.sign({ id: usuario._id }, process.env.JWT_SECRET, {
+      const token = jwt.sign({ id: usuario._id }, process.env.SECRET, {
         expiresIn: "1d",
       });
 
