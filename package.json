@@ -17,7 +17,7 @@
     "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watchAll",
     "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watchAll --coverage"
   },
-  "author": "",
+  "author": "Alexandre Nogueira de Lira",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",

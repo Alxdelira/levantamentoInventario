@@ -4,13 +4,14 @@ const swaggerOptions = {
     info: {
       title: "Api - Levantamento Patrimonial",
       description: "Projeto para o Levantamento Patrimonial, feito em 2023 para o Instituto Federal de Rondônia - IFRO",
-      version: "1.0.0"
-    },
-    servers: [
-      {
-        url: 'https://api-inventario-ynuc.onrender.com',
-        description: "Api - Levantamento Patrimonial",
+      version: "1.1.0",
+      contact: {
+        name: "Alexandre Nogueira",
+        email: "alx.delira@gmail.com",
+        url: "https://portfolioalxdelira.vercel.app/",
       },
+    },
+    servers: [     
       {
         url: 'http://localhost:3001',
         description: "Api - Levantamento Patrimonial",

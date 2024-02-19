@@ -77,6 +77,7 @@ Comando para iniciar os testes unitarios e de integração:
 
 ## :soon: Implementação futura
 * Implementação de um metodo de validação para grupos de usuarios;
+* Implementar uploads de imagens;
 ## :handshake: Colaboradores
 <table>
   <tr>
@@ -93,4 +94,4 @@ Comando para iniciar os testes unitarios e de integração:
 
 ## :dart: Status do projeto
 
-* Em Andamento...
+* Primeira Versão Finalizada

@@ -32,7 +32,7 @@ const router = express.Router();
  * tags:
  *   name: Inventarios
  *   description: Rotas relacionadas a Inventários
- * inventarios:
+ * /inventarios:
  *   get:
  *     summary: Lista todos os Inventários
  *     tags: [Inventarios]
@@ -64,13 +64,42 @@ const router = express.Router();
  *         description: Quantidade de registros por página
  *     responses:
  *       200:
- *         description: Lista de Inventários
- *       401:
- *         description: Não autorizado 
+ *         description: Lista de usuários
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 docs:
+ *                   type: array 
+ *                   items:
+ *                     $ref: '#/components/schemas/Inventarios'
  *       404:
- *         description: Inventário não encontrado
+ *         description: Nenhum usuário encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: boolean 
+ *                 code: 
+ *                   type: integer
+ *                 message:
+ *                   type: string
  *       500:
  *         description: Erro interno no servidor
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: boolean 
+ *                 code: 
+ *                   type: integer
+ *                 message:
+ *                   type: string
  *   post:
  *     summary: Cadastra um novo Inventário
  *     tags: [Inventarios]
@@ -79,7 +108,7 @@ const router = express.Router();
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemasinventarios'
+ *             $ref: '#/components/schemas/Inventarios'
  *           example:
  *             setor: "6477cf3bc1beb3f224571de8"
  *             itens: "6477cf3dc1beb3f224571ded"
@@ -92,7 +121,7 @@ const router = express.Router();
  *         description: Não autorizado 
  *       500:
  *         description: Erro interno no servidor
- * inventarios/{id}:
+ * /inventarios/{id}:
  *   get:
  *     summary: Obtém um Inventário pelo ID
  *     tags: [Inventarios]
@@ -127,7 +156,7 @@ const router = express.Router();
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemasinventarios'
+ *             $ref: '#/components/schemas/Inventarios'
  *           example:
  *             setor: "6477cf3bc1beb3f224571de6"
  *             itens: "6477cf3dc1beb3f224571ded"
@@ -158,7 +187,7 @@ const router = express.Router();
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemasinventarios'
+ *             $ref: '#/components/schemas/Inventarios'
  *           example:
  *             setor: "6477cf3bc1beb3f224571de8"
  *     responses:
@@ -185,7 +214,7 @@ const router = express.Router();
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemasinventarios'
+ *             $ref: '#/components/schemas/Inventarios'
  *           example:
  *             itens: "6477cf3dc1beb3f224571ded"
  *     responses:
@@ -217,7 +246,7 @@ const router = express.Router();
  *       500:
  *         description: Erro interno no servidor
  * 
- * inventarios/itens/{id}:
+ * /inventarios/itens/{id}:
  *   patch:
  *     summary: Adiciona um item a um Inventário pelo ID
  *     tags: [Inventarios]
@@ -233,7 +262,7 @@ const router = express.Router();
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemasinventarios'
+ *             $ref: '#/components/schemas/Inventarios'
  *           example:
  *             itens: "648345f6421bf3b83436450d"
  *     responses:
@@ -251,7 +280,7 @@ const router = express.Router();
  * @swagger
  * tags:
  *  name: Inventarios
- * inventarios/itens/{id}:
+ * /inventarios/itens/{id}:
  *    delete:
  *     summary: Remove um item de um Inventário pelo ID
  *     tags: [Inventarios]
@@ -267,7 +296,7 @@ const router = express.Router();
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemasinventarios'
+ *             $ref: '#/components/schemas/Inventarios'
  *           example:
  *             itens: "648345f6421bf3b83436450d"
  *     responses:
@@ -285,7 +314,7 @@ const router = express.Router();
 
 
 router
-  .post('inventarios',AuthMiddlewares,InventarioController.cadastrarInventario)
+  .post('/inventarios',AuthMiddlewares,InventarioController.cadastrarInventario)
   .get('/inventarios',AuthMiddlewares,InventarioController.listarInventarios)
   .get('/inventarios/:id',AuthMiddlewares,InventarioController.listarInventariosId)
   .put('/inventarios/:id',AuthMiddlewares,InventarioController.atualizarInventario)
