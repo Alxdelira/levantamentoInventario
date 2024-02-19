@@ -13,6 +13,10 @@ const swaggerOptions = {
     },
     servers: [     
       {
+        url: 'https://levantamento-inventario.vercel.app/',
+        description: "Api - Levantamento Patrimonial",
+      },
+      {
         url: 'http://localhost:3001',
         description: "Api - Levantamento Patrimonial",
       },
